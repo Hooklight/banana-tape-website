@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banana Tape | For Everything Regular Tape Would Ruin</title>
+    <meta name="description" content="The self-sealing tape that only attaches to itself. For thread spools, card collections, plants, cables, and everything regular tape would ruin.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --yellow: #F7C948;
+            --yellow-light: #FEF9E8;
+            --yellow-hover: #E5B83E;
+            --black: #1A1A1A;
+            --white: #FFFFFF;
+            --cream: #FDFBF7;
+            --warm-gray: #F7F5F2;
+            --gray-600: #5C5C5C;
+            --gray-400: #9A9A9A;
+            --gray-200: #E8E8E8;
+            --green: #2ECC71;
+            --red: #E74C3C;
+
+            --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--gray-600);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        ::selection {
+            background: var(--yellow);
+            color: var(--black);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(20px);
+            padding: 14px 0;
+            box-shadow: 0 1px 0 var(--gray-200);
+        }
+
+        .nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--black);
+        }
+
+        .nav-cta {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            background: var(--black);
+            padding: 12px 24px;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-cta { display: none; }
+        }
+
+        /* ============================================
+           POPUP MODAL - PREMIUM EXECUTION
+           ============================================ */
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 32px;
+            max-width: 500px;
+            width: 100%;
+            padding: 48px 44px;
+            position: relative;
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.4);
+            animation: slideUpModal 0.4s var(--ease-out);
+            text-align: center;
+        }
+
+        @keyframes slideUpModal {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            font-size: 32px;
+            color: var(--gray-400);
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: var(--gray-200);
+            color: var(--black);
+            transform: rotate(90deg);
+        }
+
+        .modal-badge {
+            display: inline-block;
+            background: var(--yellow-light);
+            color: var(--yellow-hover);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 10px 18px;
+            border-radius: 100px;
+            margin-bottom: 24px;
+        }
+
+        .modal h3 {
+            font-size: 34px;
+            font-weight: 800;
+            color: var(--black);
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+        }
+
+        .modal-price {
+            font-size: 52px;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 12px;
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .modal-price-note {
+            font-size: 16px;
+            color: var(--gray-600);
+            font-weight: 600;
+            margin-bottom: 32px;
+        }
+
+        .modal-benefits {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 36px;
+            padding: 0 12px;
+        }
+
+        .modal-benefits li {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 0;
+            font-size: 16px;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        .modal-benefits li::before {
+            content: '✓';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--yellow);
+            border-radius: 50%;
+            color: var(--black);
+            font-weight: 800;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .modal .email-form-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .modal .email-input {
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 16px;
+            font-family: var(--font);
+            border: 2px solid var(--gray-200);
+            border-radius: 100px;
+            outline: none;
+            transition: all 0.2s;
+            background: var(--white);
+        }
+
+        .modal .email-input:focus {
+            border-color: var(--yellow);
+            box-shadow: 0 0 0 4px var(--yellow-light);
+        }
+
+        .modal .email-input::placeholder {
+            color: var(--gray-400);
+        }
+
+        .modal .btn-waitlist {
+            width: 100%;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--black);
+            background: var(--yellow);
+            padding: 18px 32px;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: var(--font);
+        }
+
+        .modal .btn-waitlist:hover {
+            background: var(--yellow-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(247, 201, 72, 0.4);
+        }
+
+        .modal .email-note {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        @media (max-width: 600px) {
+            .modal {
+                padding: 40px 32px;
+                border-radius: 24px;
+            }
+
+            .modal h3 {
+                font-size: 28px;
+            }
+
+            .modal-price {
+                font-size: 44px;
+            }
+
+            .modal-benefits {
+                padding: 0 4px;
+            }
+
+            .modal-benefits li {
+                font-size: 15px;
+            }
+        }
+
+        /* ============================================
+           HERO - ENHANCED
+           ============================================ */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 0 80px;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(247, 201, 72, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 580px;
+        }
+
+        .hero-hook {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--yellow-hover);
+            background: var(--yellow-light);
+            padding: 12px 20px;
+            border-radius: 100px;
+            margin-bottom: 28px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-headline {
+            font-size: clamp(48px, 6vw, 72px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            color: var(--black);
+            margin-bottom: 24px;
+            animation: slideUp 0.6s ease-out 0.1s backwards;
+        }
+
+        .hero-headline-accent {
+            background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-hover) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subline {
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 16px;
+            line-height: 1.4;
+            animation: slideUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .hero-description {
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--gray-400);
+            margin-bottom: 36px;
+            animation: slideUp 0.6s ease-out 0.3s backwards;
+        }
+
+        .email-form {
+            margin-bottom: 24px;
+            animation: slideUp 0.6s ease-out 0.4s backwards;
+        }
+
+        .email-form-wrapper {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 18px 24px;
+            font-size: 16px;
+            font-family: var(--font);
+            border: 2px solid var(--gray-200);
+            border-radius: 100px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .email-input:focus {
+            border-color: var(--yellow);
+            box-shadow: 0 0 0 4px var(--yellow-light);
+        }
+
+        .email-input::placeholder {
+            color: var(--gray-400);
+        }
+
+        .btn-waitlist {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+            background: var(--yellow);
+            padding: 18px 32px;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            font-family: var(--font);
+        }
+
+        .btn-waitlist:hover {
+            background: var(--yellow-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(247, 201, 72, 0.4);
+        }
+
+        .btn-waitlist:active {
+            transform: translateY(-1px);
+        }
+
+        .email-note {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        .hero-proof {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-top: 24px;
+            border-top: 1px solid var(--gray-200);
+            animation: slideUp 0.6s ease-out 0.5s backwards;
+        }
+
+        .hero-proof-text {
+            font-size: 14px;
+            color: var(--gray-400);
+        }
+
+        .hero-proof-text strong {
+            color: var(--gray-600);
+            font-weight: 700;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideUp 0.6s ease-out 0.3s backwards;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 520px;
+            aspect-ratio: 1;
+            background: var(--warm-gray);
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.02);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .sold-out-badge {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: var(--black);
+            color: var(--white);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 10px 18px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            z-index: 10;
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 50px;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-visual {
+                width: 100%;
+            }
+
+            .hero-image {
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .email-form-wrapper {
+                flex-direction: column;
+                max-width: 450px;
+                margin: 0 auto 12px;
+            }
+
+            .hero-proof {
+                justify-content: center;
+            }
+
+            .email-form {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-image {
+                border-radius: 20px;
+            }
+
+            .sold-out-badge {
+                top: 16px;
+                right: 16px;
+                font-size: 10px;
+                padding: 8px 14px;
+            }
+        }
+
+        /* ============================================
+           MARQUEE
+           ============================================ */
+
+        .marquee-section {
+            padding: 20px 0;
+            background: var(--yellow);
+            overflow: hidden;
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee 35s linear infinite;
+        }
+
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 40px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--black);
+            white-space: nowrap;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ============================================
+           HOOK SECTION
+           ============================================ */
+
+        .hook-section {
+            padding: 100px 0;
+            text-align: center;
+            background: var(--white);
+        }
+
+        .hook-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--yellow-hover);
+            margin-bottom: 16px;
+        }
+
+        .hook-headline {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            margin-bottom: 24px;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hook-headline span {
+            color: var(--yellow-hover);
+        }
+
+        .hook-subtext {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--gray-600);
+            max-width: 650px;
+            margin: 0 auto 48px;
+        }
+
+        .hook-image {
+            max-width: 1000px;
+            margin: 0 auto 48px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--warm-gray);
+            aspect-ratio: 16/9;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+        }
+
+        .hook-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mobile-waitlist-cta {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .hook-section {
+                padding: 80px 0;
+            }
+
+            .hook-image {
+                max-width: 100%;
+            }
+
+            .mobile-waitlist-cta {
+                display: block;
+                max-width: 450px;
+                margin: 0 auto;
+            }
+
+            .mobile-waitlist-cta .email-form-wrapper {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hook-image {
+                border-radius: 16px;
+            }
+        }
+
+        /* ============================================
+           SEGMENTS
+           ============================================ */
+
+        .segments-section {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .segments-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--yellow-hover);
+            margin-bottom: 12px;
+        }
+
+        .section-headline {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            margin-bottom: 14px;
+        }
+
+        .section-subline {
+            font-size: 17px;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .segments-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .segment-card {
+            background: var(--white);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+
+        .segment-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        .segment-image {
+            aspect-ratio: 4/3;
+            background: var(--warm-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: var(--gray-400);
+            text-align: center;
+            padding: 12px;
+            overflow: hidden;
+        }
+
+        .segment-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .segment-content {
+            padding: 28px;
+        }
+
+        .segment-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--white);
+            background: var(--black);
+            padding: 6px 12px;
+            border-radius: 100px;
+            margin-bottom: 14px;
+        }
+
+        .segment-tag.loyal {
+            background: var(--yellow-hover);
+            color: var(--black);
+        }
+
+        .segment-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        .segment-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--gray-600);
+        }
+
+        @media (max-width: 1100px) {
+            .segments-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .segments-section {
+                padding: 60px 0;
+            }
+
+            .segments-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+                gap: 20px;
+            }
+
+            .segment-card {
+                border-radius: 20px;
+            }
+        }
+
+        /* ============================================
+           USE CASES
+           ============================================ */
+
+        .uses-section {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .uses-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .uses-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 18px;
+        }
+
+        .use-card {
+            background: var(--warm-gray);
+            border-radius: 20px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .use-card:hover {
+            background: var(--yellow-light);
+            transform: translateY(-6px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .use-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .use-card h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .use-card p {
+            font-size: 12px;
+            color: var(--gray-400);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 1000px) {
+            .uses-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .uses-section {
+                padding: 60px 0;
+            }
+
+            .uses-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+
+            .use-card {
+                padding: 24px 16px;
+            }
+        }
+
+        /* ============================================
+           HOW IT WORKS
+           ============================================ */
+
+        .how-section {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .how-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 32px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        .step h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--gray-600);
+        }
+
+        @media (max-width: 900px) {
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 36px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .how-section {
+                padding: 60px 0;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        /* ============================================
+           PRODUCT SECTION
+           ============================================ */
+
+        .product-section {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .product-image {
+            background: var(--warm-gray);
+            border-radius: 32px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .product-details .section-label {
+            margin-bottom: 10px;
+        }
+
+        .product-details h2 {
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .product-tagline {
+            font-size: 17px;
+            color: var(--gray-600);
+            margin-bottom: 28px;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: baseline;
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+
+        .product-price .amount-old {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--gray-400);
+            text-decoration: line-through;
+        }
+
+        .product-price .amount {
+            font-size: 44px;
+            font-weight: 800;
+            color: var(--black);
+        }
+
+        .product-price .note {
+            font-size: 15px;
+            color: var(--gray-400);
+        }
+
+        .sold-out-notice {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: 28px;
+        }
+
+        .sold-out-notice::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: var(--red);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 36px;
+        }
+
+        .product-features li {
+            font-size: 15px;
+            line-height: 1.5;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            color: var(--gray-600);
+        }
+
+        .product-features li:last-child {
+            border-bottom: none;
+        }
+
+        .product-features strong {
+            color: var(--black);
+            font-weight: 700;
+        }
+
+        .feature-check {
+            width: 24px;
+            height: 24px;
+            background: var(--yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .feature-check svg {
+            width: 13px;
+            height: 13px;
+            color: var(--black);
+        }
+
+        .waitlist-form {
+            background: var(--yellow-light);
+            padding: 28px;
+            border-radius: 20px;
+        }
+
+        .waitlist-form h4 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .waitlist-form p {
+            font-size: 14px;
+            color: var(--gray-600);
+            margin-bottom: 18px;
+        }
+
+        .waitlist-form .email-form-wrapper {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 900px) {
+            .product-section {
+                padding: 60px 0;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .product-image {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .product-image {
+                border-radius: 20px;
+            }
+
+            .waitlist-form .email-form-wrapper {
+                flex-direction: column;
+            }
+        }
+
+        /* ============================================
+           TESTIMONIALS
+           ============================================ */
+
+        .testimonials-section {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 36px;
+        }
+
+        .testimonial-stars {
+            color: var(--yellow);
+            font-size: 17px;
+            margin-bottom: 18px;
+            letter-spacing: 3px;
+        }
+
+        .testimonial-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--gray-600);
+            margin-bottom: 28px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--yellow-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--yellow-hover);
+        }
+
+        .author-name {
+            font-weight: 700;
+            color: var(--black);
+            font-size: 15px;
+        }
+
+        .author-title {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        @media (max-width: 900px) {
+            .testimonials-section {
+                padding: 60px 0;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+                gap: 24px;
+            }
+        }
+
+        /* ============================================
+           CTA SECTION
+           ============================================ */
+
+        .cta-section {
+            padding: 100px 0;
+            background: var(--black);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-headline {
+            font-size: clamp(30px, 4vw, 44px);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: var(--white);
+            margin-bottom: 18px;
+        }
+
+        .cta-text {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--gray-400);
+            margin-bottom: 36px;
+        }
+
+        .cta-form .email-form-wrapper {
+            max-width: 500px;
+            margin: 0 auto 14px;
+        }
+
+        .cta-form .email-input {
+            background: var(--white);
+            border-color: transparent;
+        }
+
+        .cta-form .email-note {
+            color: var(--gray-400);
+        }
+
+        @media (max-width: 600px) {
+            .cta-section {
+                padding: 60px 0;
+            }
+
+            .cta-form .email-form-wrapper {
+                flex-direction: column;
+            }
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+
+        .footer {
+            padding: 64px 0 36px;
+            background: var(--warm-gray);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--gray-600);
+            margin-top: 14px;
+        }
+
+        .footer h4 {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--black);
+        }
+
+        .footer-bottom {
+            padding-top: 36px;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-legal a {
+            font-size: 13px;
+            color: var(--gray-400);
+            text-decoration: none;
+        }
+
+        .footer-legal a:hover {
+            color: var(--black);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 18px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <a href="#" class="logo">Banana Tape</a>
+            <div class="nav-links">
+                <a href="#uses" class="nav-link">Uses</a>
+                <a href="#how" class="nav-link">How It Works</a>
+            </div>
+            <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+        </div>
+    </nav>
+
+    <!-- POPUP MODAL -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <span class="modal-badge">Special Offer</span>
+            <h3>Be First to Know</h3>
+            <div class="modal-price">$9.99</div>
+            <p class="modal-price-note">Lowest price ever + FREE shipping</p>
+
+            <ul class="modal-benefits">
+                <li>Get notified before the public</li>
+                <li>Lock in our lowest price</li>
+                <li>Free shipping on your first order</li>
+            </ul>
+
+            <form name="waitlist-popup" method="POST" data-netlify="true">
+                <input type="hidden" name="form-name" value="waitlist-popup">
+                <input type="hidden" name="source" value="popup">
+                <div class="email-form-wrapper">
+                    <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+                    <button type="submit" class="btn-waitlist">Reserve My Spot</button>
+                </div>
+                <p class="email-note">No spam. Just a heads up when we restock.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-hook">For Everything Regular Tape Would Ruin</span>
+                <h1 class="hero-headline">
+                    Wrap anything.<br><span class="hero-headline-accent">Damage nothing.</span>
+                </h1>
+                <p class="hero-subline">
+                    The self-sealing tape that only attaches to itself, never to your stuff.
+                </p>
+                <p class="hero-description">
+                    Thread spools. Card collections. Plants. Cables. If you've ever had tape ruin something, you need Banana Tape. It wraps, it holds, it releases clean. Every time.
+                </p>
+
+                <form name="waitlist-hero" method="POST" data-netlify="true" class="email-form">
+                    <input type="hidden" name="form-name" value="waitlist-hero">
+                    <input type="hidden" name="source" value="hero">
+                    <div class="email-form-wrapper">
+                        <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+                        <button type="submit" class="btn-waitlist">Join Waitlist</button>
+                    </div>
+                    <p class="email-note">Be first to know when we're back in stock. No spam, ever.</p>
+                </form>
+
+                <div class="hero-proof">
+                    <span class="hero-proof-text"><strong>Sold out in 48 hours.</strong> Join 2,000+ on the waitlist.</span>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image">
+                    <span class="sold-out-badge">Sold Out</span>
+                    <img src="hero.png" alt="Banana Tape roll with transparent tape unrolling">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <section class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <div class="marquee-item">✓ Self-sealing</div>
+                <div class="marquee-item">✓ Zero residue</div>
+                <div class="marquee-item">✓ Reusable</div>
+                <div class="marquee-item">✓ Transparent</div>
+                <div class="marquee-item">✓ Waterproof</div>
+                <div class="marquee-item">✓ Lasts forever</div>
+                <div class="marquee-item">✓ Self-sealing</div>
+                <div class="marquee-item">✓ Zero residue</div>
+                <div class="marquee-item">✓ Reusable</div>
+                <div class="marquee-item">✓ Transparent</div>
+                <div class="marquee-item">✓ Waterproof</div>
+                <div class="marquee-item">✓ Lasts forever</div>
+            </div>
+            <div class="marquee-content">
+                <div class="marquee-item">✓ Self-sealing</div>
+                <div class="marquee-item">✓ Zero residue</div>
+                <div class="marquee-item">✓ Reusable</div>
+                <div class="marquee-item">✓ Transparent</div>
+                <div class="marquee-item">✓ Waterproof</div>
+                <div class="marquee-item">✓ Lasts forever</div>
+                <div class="marquee-item">✓ Self-sealing</div>
+                <div class="marquee-item">✓ Zero residue</div>
+                <div class="marquee-item">✓ Reusable</div>
+                <div class="marquee-item">✓ Transparent</div>
+                <div class="marquee-item">✓ Waterproof</div>
+                <div class="marquee-item">✓ Lasts forever</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOOK SECTION -->
+    <section class="hook-section">
+        <div class="container">
+            <p class="hook-label reveal">The problem</p>
+            <h2 class="hook-headline reveal" style="transition-delay: 0.05s;">
+                For everything <span>regular tape</span> would ruin.
+            </h2>
+            <p class="hook-subtext reveal" style="transition-delay: 0.1s;">
+                Sticky residue on your thread spools. Rubber bands damaging your cards. Twist ties cutting into your plants. Regular tape and its alternatives damage the things they're supposed to protect. Banana Tape can't because it only attaches to itself.
+            </p>
+            <div class="hook-image reveal" style="transition-delay: 0.15s;">
+                <img src="crafts.png" alt="Banana Tape with arts and crafts supplies">
+            </div>
+
+            <!-- Mobile waitlist CTA -->
+            <div class="mobile-waitlist-cta reveal" style="transition-delay: 0.2s;">
+                <form name="waitlist-mobile" method="POST" data-netlify="true">
+                    <input type="hidden" name="form-name" value="waitlist-mobile">
+                    <input type="hidden" name="source" value="mobile-hook">
+                    <div class="email-form-wrapper">
+                        <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+                        <button type="submit" class="btn-waitlist">Join Waitlist</button>
+                    </div>
+                    <p class="email-note">Be first to know when we're back in stock.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEGMENTS -->
+    <section class="segments-section">
+        <div class="container">
+            <div class="segments-header reveal">
+                <p class="section-label">Who it's for</p>
+                <h2 class="section-headline">Made for people who care about their stuff</h2>
+                <p class="section-subline">Whether you've been searching for a solution or just discovered you need one.</p>
+            </div>
+            <div class="segments-grid">
+                <div class="segment-card reveal">
+                    <div class="segment-image">
+                        <img src="crafts.png" alt="Thread spools wrapped with Banana Tape">
+                    </div>
+                    <div class="segment-content">
+                        <span class="segment-tag loyal">Fan Favorite</span>
+                        <h3>Sewers & Quilters</h3>
+                        <p>Keep thread ends secure. No more unraveling spools, tangled embroidery, or messy bobbins.</p>
+                    </div>
+                </div>
+
+                <div class="segment-card reveal" style="transition-delay: 0.1s;">
+                    <div class="segment-image">
+                        Add cards image
+                    </div>
+                    <div class="segment-content">
+                        <span class="segment-tag loyal">Fan Favorite</span>
+                        <h3>Collectors & Gamers</h3>
+                        <p>Bundle cards, secure game decks, protect comics. Better than rubber bands, zero damage.</p>
+                    </div>
+                </div>
+
+                <div class="segment-card reveal" style="transition-delay: 0.2s;">
+                    <div class="segment-image">
+                        Add plant image
+                    </div>
+                    <div class="segment-content">
+                        <span class="segment-tag">New Discovery</span>
+                        <h3>Plant Parents</h3>
+                        <p>Support stems and train vines without cutting or scarring. Gentle hold, clean release.</p>
+                    </div>
+                </div>
+
+                <div class="segment-card reveal" style="transition-delay: 0.3s;">
+                    <div class="segment-image">
+                        <img src="cables.png" alt="Cable management with Banana Tape">
+                    </div>
+                    <div class="segment-content">
+                        <span class="segment-tag">New Discovery</span>
+                        <h3>Home Organizers</h3>
+                        <p>Wrangle cables, bundle supplies, pack for travel. Reusable and invisible when wrapped.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- USE CASES -->
+    <section id="uses" class="uses-section">
+        <div class="container">
+            <div class="uses-header reveal">
+                <p class="section-label">Use cases</p>
+                <h2 class="section-headline">One tape. Endless uses.</h2>
+            </div>
+            <div class="uses-grid">
+                <div class="use-card reveal">
+                    <div class="use-icon">🧵</div>
+                    <h4>Thread Spools</h4>
+                    <p>Secure ends, prevent unraveling</p>
+                </div>
+                <div class="use-card reveal" style="transition-delay: 0.05s;">
+                    <div class="use-icon">🃏</div>
+                    <h4>Card Decks</h4>
+                    <p>Bundle without rubber band damage</p>
+                </div>
+                <div class="use-card reveal" style="transition-delay: 0.1s;">
+                    <div class="use-icon">🌱</div>
+                    <h4>Plant Support</h4>
+                    <p>Tie stems without cutting in</p>
+                </div>
+                <div class="use-card reveal" style="transition-delay: 0.15s;">
+                    <div class="use-icon">🔌</div>
+                    <h4>Cable Bundles</h4>
+                    <p>Organize cords, reposition anytime</p>
+                </div>
+                <div class="use-card reveal" style="transition-delay: 0.2s;">
+                    <div class="use-icon">🧳</div>
+                    <h4>Travel Packing</h4>
+                    <p>Secure items, unpack clean</p>
+                </div>
+                <div class="use-card reveal" style="transition-delay: 0.25s;">
+                    <div class="use-icon">🎁</div>
+                    <h4>Crafts & More</h4>
+                    <p>Endless creative uses</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="how-section">
+        <div class="container">
+            <div class="how-header reveal">
+                <p class="section-label">How it works</p>
+                <h2 class="section-headline">Simple. No mess. No regrets.</h2>
+            </div>
+            <div class="steps-grid">
+                <div class="step reveal">
+                    <div class="step-icon">🔄</div>
+                    <h4>Wrap</h4>
+                    <p>Wrap Banana Tape around whatever you're bundling or securing.</p>
+                </div>
+                <div class="step reveal" style="transition-delay: 0.1s;">
+                    <div class="step-icon">↔️</div>
+                    <h4>Stretch</h4>
+                    <p>Give it a slight stretch to activate the self-sealing hold.</p>
+                </div>
+                <div class="step reveal" style="transition-delay: 0.2s;">
+                    <div class="step-icon">✋</div>
+                    <h4>Press</h4>
+                    <p>Press the end to itself. It only seals to itself, never to your stuff.</p>
+                </div>
+                <div class="step reveal" style="transition-delay: 0.3s;">
+                    <div class="step-icon">✨</div>
+                    <h4>Release</h4>
+                    <p>When done, unwrap from the end. No residue. No damage. Done.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT SECTION -->
+    <section id="waitlist" class="product-section">
+        <div class="container">
+            <div class="product-grid">
+                <div class="product-image reveal">
+                    <span class="sold-out-badge">Sold Out</span>
+                    <img src="product-specs.png" alt="Banana Tape: 50 ft long, 1 inch wide, clear and reusable">
+                </div>
+                <div class="product-details reveal" style="transition-delay: 0.1s;">
+                    <p class="section-label">Coming back soon</p>
+                    <h2>Banana Tape | 1" Width</h2>
+                    <p class="product-tagline">The tape you won't regret.</p>
+                    <div class="product-price">
+                        <span class="amount-old">$12.99</span>
+                        <span class="amount">$9.99</span>
+                        <span class="note">per roll</span>
+                    </div>
+                    <p class="sold-out-notice">Sold Out</p>
+
+                    <ul class="product-features">
+                        <li>
+                            <span class="feature-check">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                            </span>
+                            <span><strong>Self-sealing:</strong> only attaches to itself</span>
+                        </li>
+                        <li>
+                            <span class="feature-check">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                            </span>
+                            <span><strong>Transparent:</strong> see what you've wrapped</span>
+                        </li>
+                        <li>
+                            <span class="feature-check">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                            </span>
+                            <span><strong>Reusable:</strong> wash and use again, forever</span>
+                        </li>
+                        <li>
+                            <span class="feature-check">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+                            </span>
+                            <span><strong>Waterproof:</strong> works anywhere</span>
+                        </li>
+                    </ul>
+
+                    <div class="waitlist-form">
+                        <h4>Get notified when we restock</h4>
+                        <p>Join the waitlist and be first in line.</p>
+                        <form name="waitlist-product" method="POST" data-netlify="true">
+                            <input type="hidden" name="form-name" value="waitlist-product">
+                            <input type="hidden" name="source" value="product">
+                            <div class="email-form-wrapper">
+                                <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+                                <button type="submit" class="btn-waitlist">Notify Me</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="testimonials-header reveal">
+                <p class="section-label">Reviews</p>
+                <h2 class="section-headline">Why people keep coming back</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "I use this on all my thread spools. No more unraveling, no more tangled messes. I've been buying this stuff for years... it lasts forever and works every single time."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">L</div>
+                        <div>
+                            <div class="author-name">Linda M.</div>
+                            <div class="author-title">Quilter</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Way better than rubber bands for my board game card decks. Rubber bands leave marks and eventually break, this tape holds perfectly and the cards are always visible."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">J</div>
+                        <div>
+                            <div class="author-name">James K.</div>
+                            <div class="author-title">Board Gamer</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "I discovered this for organizing cables and now I use it everywhere: cords, travel packing, even bundling holiday lights. It just works and never leaves a mess."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div>
+                            <div class="author-name">Sarah T.</div>
+                            <div class="author-title">Home Organizer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content reveal">
+                <h2 class="cta-headline">Don't miss the restock.</h2>
+                <p class="cta-text">Join 2,000+ people waiting for Banana Tape. Be first to know when we're back.</p>
+                <form name="waitlist-footer" method="POST" data-netlify="true" class="cta-form">
+                    <input type="hidden" name="form-name" value="waitlist-footer">
+                    <input type="hidden" name="source" value="footer">
+                    <div class="email-form-wrapper">
+                        <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+                        <button type="submit" class="btn-waitlist">Join Waitlist</button>
+                    </div>
+                    <p class="email-note">No spam. Just a restock notification.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">Banana Tape</a>
+                    <p>Wrap anything. Damage nothing.<br>The tape you won't regret.</p>
+                </div>
+                <div>
+                    <h4>Learn</h4>
+                    <ul class="footer-links">
+                        <li><a href="#uses">Use Cases</a></li>
+                        <li><a href="#how">How It Works</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:hello@bananatape.com">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Our Story</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Banana Tape. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < window.innerHeight * 0.88) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+        revealOnScroll();
+        window.addEventListener('scroll', revealOnScroll);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Modal functionality
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalClose = document.getElementById('modalClose');
+
+        // Show popup after 5 seconds on mobile
+        if (window.innerWidth <= 1024) {
+            setTimeout(() => {
+                modalOverlay.classList.add('active');
+            }, 5000);
+        }
+
+        // Close modal
+        modalClose.addEventListener('click', () => {
+            modalOverlay.classList.remove('active');
+        });
+
+        // Close on overlay click
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('active');
+            }
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                modalOverlay.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
