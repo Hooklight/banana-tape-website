@@ -687,6 +687,33 @@
         }
 
         /* ============================================
+           FEATURES SHOWCASE
+           ============================================ */
+
+        .features-showcase {
+            padding: 80px 0;
+            background: linear-gradient(180deg, var(--white) 0%, var(--yellow-ultra-light) 100%);
+        }
+
+        .features-image {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .features-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        @media (max-width: 768px) {
+            .features-showcase {
+                padding: 60px 0;
+            }
+        }
+
+        /* ============================================
            HOOK SECTION
            ============================================ */
 
@@ -1554,7 +1581,7 @@
             <div class="hero-visual">
                 <div class="hero-image">
                     <span class="sold-out-badge">Sold Out</span>
-                    <img src="hero.png" alt="Banana Tape roll with transparent tape unrolling">
+                    <img src="three-rolls.png" alt="Three rolls of Banana Tape with transparent tape unrolling">
                 </div>
             </div>
         </div>
@@ -1594,6 +1621,15 @@
         </div>
     </section>
 
+    <!-- FEATURES SHOWCASE -->
+    <section class="features-showcase">
+        <div class="container">
+            <div class="features-image reveal">
+                <img src="feature-icons.png" alt="Banana Tape features: Waterproof, Non-Adhesive, Reusable">
+            </div>
+        </div>
+    </section>
+
     <!-- HOOK SECTION -->
     <section class="hook-section">
         <div class="container">
@@ -1605,7 +1641,7 @@
                 Sticky residue on your thread spools. Rubber bands damaging your cards. Twist ties cutting into your plants. Regular tape and its alternatives damage the things they're supposed to protect. Banana Tape can't because it only attaches to itself.
             </p>
             <div class="hook-image reveal" style="transition-delay: 0.15s;">
-                <img src="crafts.png" alt="Banana Tape with arts and crafts supplies">
+                <img src="crafts-spools.png" alt="Colorful thread spools with Banana Tape">
             </div>
 
             <!-- Mobile waitlist CTA -->
@@ -1634,7 +1670,7 @@
             <div class="segments-grid">
                 <div class="segment-card reveal">
                     <div class="segment-image">
-                        <img src="crafts.png" alt="Thread spools wrapped with Banana Tape">
+                        <img src="yarn-wrapping.png" alt="Yarn with Banana Tape securing it">
                     </div>
                     <div class="segment-content">
                         <span class="segment-tag loyal">Fan Favorite</span>
@@ -1645,7 +1681,7 @@
 
                 <div class="segment-card reveal" style="transition-delay: 0.1s;">
                     <div class="segment-image">
-                        Add cards image
+                        <img src="books-packing.png" alt="Books bundled with Banana Tape">
                     </div>
                     <div class="segment-content">
                         <span class="segment-tag loyal">Fan Favorite</span>
@@ -1656,7 +1692,7 @@
 
                 <div class="segment-card reveal" style="transition-delay: 0.2s;">
                     <div class="segment-image">
-                        Add plant image
+                        <img src="waterproof-demo.png" alt="Water-resistant Banana Tape in action">
                     </div>
                     <div class="segment-content">
                         <span class="segment-tag">New Discovery</span>
