@@ -729,24 +729,41 @@
 
         .scroll-indicator {
             display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            margin-top: 40px;
-            opacity: 0.6;
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-hover) 100%);
+            color: var(--black);
+            padding: 14px 24px;
+            border-radius: 100px;
+            box-shadow: 0 8px 24px rgba(247, 201, 72, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInBounce 1s ease-out;
+        }
+
+        .scroll-indicator.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-50%) translateY(20px);
         }
 
         .scroll-text {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--gray-500);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--black);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .scroll-arrow {
-            color: var(--yellow-hover);
+            color: var(--black);
             animation: bounce 2s ease-in-out infinite;
+            width: 20px;
+            height: 20px;
         }
 
         @keyframes bounce {
@@ -754,7 +771,18 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(8px);
+                transform: translateY(6px);
+            }
+        }
+
+        @keyframes fadeInBounce {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
             }
         }
 
@@ -1803,11 +1831,13 @@
         </div>
 
         <!-- Scroll Indicator (Mobile Only) -->
-        <div class="scroll-indicator">
-            <span class="scroll-text">Scroll to explore</span>
-            <svg class="scroll-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
-            </svg>
+        <div class="scroll-indicator" id="scrollIndicator">
+            <span class="scroll-text">
+                Scroll to explore
+                <svg class="scroll-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+                </svg>
+            </span>
         </div>
     </section>
 
@@ -2314,6 +2344,27 @@
                 form.addEventListener('submit', handleFormSubmit);
             }
         });
+
+        // Scroll indicator
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        if (scrollIndicator && window.innerWidth <= 1024) {
+            // Hide on scroll
+            let hasScrolled = false;
+            window.addEventListener('scroll', () => {
+                if (!hasScrolled && window.scrollY > 50) {
+                    hasScrolled = true;
+                    scrollIndicator.classList.add('hidden');
+                }
+            });
+
+            // Click to scroll down
+            scrollIndicator.addEventListener('click', () => {
+                window.scrollTo({
+                    top: window.innerHeight,
+                    behavior: 'smooth'
+                });
+            });
+        }
     </script>
 
 </body>
