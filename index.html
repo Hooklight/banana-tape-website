@@ -186,15 +186,16 @@
         }
 
         .modal {
-            background: var(--white);
+            background: linear-gradient(135deg, #ffffff 0%, #fffef7 100%);
             border-radius: 32px;
-            max-width: 500px;
+            max-width: 540px;
             width: 100%;
             padding: 48px 44px;
             position: relative;
-            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(247, 201, 72, 0.2);
             animation: slideUpModal 0.4s var(--ease-out);
             text-align: center;
+            border: 2px solid rgba(247, 201, 72, 0.3);
         }
 
         @keyframes slideUpModal {
@@ -255,13 +256,60 @@
             margin-bottom: 16px;
         }
 
+        .modal-badge-sold {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 10px 20px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(255, 82, 82, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .modal-headline {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            color: var(--black);
+        }
+
+        .modal-subtext {
+            font-size: 16px;
+            color: var(--gray-500);
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .modal-highlight {
+            background: var(--yellow-light);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 28px;
+            text-align: center;
+            border: 2px solid var(--yellow);
+        }
+
         .modal-price {
             font-size: 52px;
             font-weight: 800;
-            color: var(--black);
-            margin-bottom: 12px;
+            color: var(--yellow-hover);
+            margin-bottom: 4px;
             line-height: 1;
             letter-spacing: -0.02em;
+        }
+
+        .modal-price-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         .modal-price-note {
@@ -349,6 +397,27 @@
             background: var(--yellow-hover);
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(247, 201, 72, 0.4);
+        }
+
+        .btn-waitlist-modal {
+            width: 100%;
+            font-size: 17px;
+            font-weight: 800;
+            color: white;
+            background: linear-gradient(135deg, var(--black) 0%, #333 100%);
+            padding: 18px 32px;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: var(--font);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-waitlist-modal:hover {
+            background: linear-gradient(135deg, #333 0%, #444 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
         }
 
         .modal .email-note {
@@ -1563,25 +1632,30 @@
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <button class="modal-close" id="modalClose">&times;</button>
-            <span class="modal-badge">Special Offer</span>
-            <h3>Be First to Know</h3>
-            <div class="modal-price">$9.99</div>
-            <p class="modal-price-note">Lowest price ever + FREE shipping</p>
+            <div class="modal-badge-sold">🔥 Sold Out</div>
+            <h3 class="modal-headline">We'll Be Back Soon</h3>
+            <p class="modal-subtext">Sold out in 48 hours. Join 2,000+ people waiting for the next drop.</p>
+
+            <div class="modal-highlight">
+                <div class="modal-price">$9.99</div>
+                <span class="modal-price-label">Restock Price</span>
+            </div>
 
             <ul class="modal-benefits">
-                <li>Get notified before the public</li>
-                <li>Lock in our lowest price</li>
-                <li>Free shipping on your first order</li>
+                <li><strong>First access</strong> before we go public</li>
+                <li><strong>Lowest price</strong> locked in ($9.99)</li>
+                <li><strong>Free shipping</strong> on your first order</li>
             </ul>
 
-            <form name="waitlist-popup" method="POST" data-netlify="true">
+            <form name="waitlist-popup" method="POST" data-netlify="true" action="/success" data-netlify-honeypot="bot-field">
                 <input type="hidden" name="form-name" value="waitlist-popup">
                 <input type="hidden" name="source" value="popup">
+                <p style="display: none;"><label>Don't fill this out: <input name="bot-field"></label></p>
                 <div class="email-form-wrapper">
                     <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
-                    <button type="submit" class="btn-waitlist">Reserve My Spot</button>
+                    <button type="submit" class="btn-waitlist-modal">Get Early Access</button>
                 </div>
-                <p class="email-note">No spam. Just a heads up when we restock.</p>
+                <p class="email-note">No spam. We'll email you once when we restock.</p>
             </form>
         </div>
     </div>
@@ -2043,16 +2117,26 @@
             });
         });
 
-        // Modal functionality
+        // Modal functionality with visit tracking
         const modalOverlay = document.getElementById('modalOverlay');
         const modalClose = document.getElementById('modalClose');
 
-        // Show popup after 5 seconds on mobile
-        if (window.innerWidth <= 1024) {
-            setTimeout(() => {
-                modalOverlay.classList.add('active');
-            }, 5000);
+        // Track visits and show modal on visits 1, 3, and 5
+        function showModalOnVisit() {
+            let visitCount = parseInt(localStorage.getItem('bananaTapeVisits') || '0');
+            visitCount++;
+            localStorage.setItem('bananaTapeVisits', visitCount.toString());
+
+            // Show modal on 1st, 3rd, and 5th visit only
+            if (visitCount === 1 || visitCount === 3 || visitCount === 5) {
+                setTimeout(() => {
+                    modalOverlay.classList.add('active');
+                }, 3000); // Show after 3 seconds
+            }
         }
+
+        // Run visit tracking
+        showModalOnVisit();
 
         // Close modal
         modalClose.addEventListener('click', () => {
