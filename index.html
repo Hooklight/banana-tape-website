@@ -1079,6 +1079,43 @@
         }
 
         /* ============================================
+           COMPARISON SECTION
+           ============================================ */
+
+        .comparison-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--white) 0%, var(--yellow-ultra-light) 100%);
+            text-align: center;
+        }
+
+        .comparison-content {
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .comparison-image {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .comparison-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 24px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.12);
+        }
+
+        @media (max-width: 768px) {
+            .comparison-section {
+                padding: 60px 0;
+            }
+
+            .comparison-content {
+                margin-bottom: 40px;
+            }
+        }
+
+        /* ============================================
            PRODUCT SECTION
            ============================================ */
 
@@ -1681,7 +1718,7 @@
 
                 <div class="segment-card reveal" style="transition-delay: 0.1s;">
                     <div class="segment-image">
-                        <img src="books-packing.png" alt="Books bundled with Banana Tape">
+                        <img src="pokemon-cards.png" alt="Pokemon cards bundled with Banana Tape">
                     </div>
                     <div class="segment-content">
                         <span class="segment-tag loyal">Fan Favorite</span>
@@ -1692,7 +1729,7 @@
 
                 <div class="segment-card reveal" style="transition-delay: 0.2s;">
                     <div class="segment-image">
-                        <img src="waterproof-demo.png" alt="Water-resistant Banana Tape in action">
+                        <img src="tomato-plant.png" alt="Tomato plant supported with Banana Tape">
                     </div>
                     <div class="segment-content">
                         <span class="segment-tag">New Discovery</span>
@@ -1785,6 +1822,20 @@
                     <h4>Release</h4>
                     <p>When done, unwrap from the end. No residue. No damage. Done.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLEM/SOLUTION -->
+    <section class="comparison-section">
+        <div class="container">
+            <div class="comparison-content reveal">
+                <p class="section-label">The difference</p>
+                <h2 class="section-headline">Regular tape destroys.<br>Banana Tape protects.</h2>
+                <p class="section-subline">Your collectibles, crafts, and keepsakes deserve better than sticky residue and permanent damage.</p>
+            </div>
+            <div class="comparison-image reveal" style="transition-delay: 0.1s;">
+                <img src="card-damage-comparison.png" alt="Comparison showing damaged card from adhesive tape vs pristine card protected with Banana Tape">
             </div>
         </div>
     </section>
