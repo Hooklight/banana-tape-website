@@ -1745,7 +1745,7 @@
                     Thread spools. Card collections. Plants. Cables. If you've ever had tape ruin something, you need Banana Tape.
                 </p>
 
-                <form name="waitlist-hero" method="POST" data-netlify="true" class="email-form">
+                <form name="waitlist-hero" method="POST" data-netlify="true" class="email-form" id="heroForm">
                     <input type="hidden" name="form-name" value="waitlist-hero">
                     <input type="hidden" name="source" value="hero">
                     <div class="email-form-wrapper">
@@ -1827,7 +1827,7 @@
 
             <!-- Mobile waitlist CTA -->
             <div class="mobile-waitlist-cta reveal" style="transition-delay: 0.2s;">
-                <form name="waitlist-mobile" method="POST" data-netlify="true">
+                <form name="waitlist-mobile" method="POST" data-netlify="true" id="mobileForm">
                     <input type="hidden" name="form-name" value="waitlist-mobile">
                     <input type="hidden" name="source" value="mobile-hook">
                     <div class="email-form-wrapper">
@@ -2031,7 +2031,7 @@
                     <div class="waitlist-form">
                         <h4>Get notified when we restock</h4>
                         <p>Join the waitlist and be first in line.</p>
-                        <form name="waitlist-product" method="POST" data-netlify="true">
+                        <form name="waitlist-product" method="POST" data-netlify="true" id="productForm">
                             <input type="hidden" name="form-name" value="waitlist-product">
                             <input type="hidden" name="source" value="product">
                             <div class="email-form-wrapper">
@@ -2102,7 +2102,7 @@
             <div class="cta-content reveal">
                 <h2 class="cta-headline">Don't miss the restock.</h2>
                 <p class="cta-text">Join 2,000+ people waiting for Banana Tape. Be first to know when we're back.</p>
-                <form name="waitlist-footer" method="POST" data-netlify="true" class="cta-form">
+                <form name="waitlist-footer" method="POST" data-netlify="true" class="cta-form" id="footerForm">
                     <input type="hidden" name="form-name" value="waitlist-footer">
                     <input type="hidden" name="source" value="footer">
                     <div class="email-form-wrapper">
@@ -2225,33 +2225,47 @@
             }
         });
 
-        // Handle popup form submission
-        const popupForm = document.getElementById('popupForm');
+        // Handle all form submissions with success toast
         const successToast = document.getElementById('successToast');
+        const forms = [
+            document.getElementById('popupForm'),
+            document.getElementById('heroForm'),
+            document.getElementById('mobileForm'),
+            document.getElementById('productForm'),
+            document.getElementById('footerForm')
+        ];
 
-        popupForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+        function showSuccessToast() {
+            successToast.classList.add('show');
+            setTimeout(() => {
+                successToast.classList.remove('show');
+            }, 2000);
+        }
 
-            // Submit to Netlify
-            fetch('/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(new FormData(popupForm)).toString()
-            }).then(() => {
-                // Close modal
-                modalOverlay.classList.remove('active');
+        forms.forEach(form => {
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
 
-                // Show success toast
-                successToast.classList.add('show');
+                    // Submit to Netlify
+                    fetch('/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams(new FormData(form)).toString()
+                    }).then(() => {
+                        // Close modal if it's the popup form
+                        if (form.id === 'popupForm') {
+                            modalOverlay.classList.remove('active');
+                        }
 
-                // Hide after 2 seconds
-                setTimeout(() => {
-                    successToast.classList.remove('show');
-                }, 2000);
+                        // Show success toast
+                        showSuccessToast();
 
-                // Reset form
-                popupForm.reset();
-            }).catch((error) => console.error('Form submission error:', error));
+                        // Reset form
+                        form.reset();
+                    }).catch((error) => console.error('Form submission error:', error));
+                });
+            }
         });
     </script>
 
