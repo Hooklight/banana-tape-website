@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banana Tape for Crafters | Create Without the Mess</title>
+    <meta name="description" content="Professional craft organization that won't ruin your ribbons, papers, or precious supplies. Perfect for ribbon, yarn, fabric, and all craft materials.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --yellow: #F7C948;
+            --yellow-light: #FEF9E8;
+            --yellow-hover: #E5B83E;
+            --black: #1A1A1A;
+            --white: #FFFFFF;
+            --cream: #FDFBF7;
+            --warm-gray: #F7F5F2;
+            --gray-600: #5C5C5C;
+            --gray-400: #9A9A9A;
+            --gray-200: #E8E8E8;
+            --green: #2ECC71;
+            --red: #E74C3C;
+
+            --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--gray-600);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        ::selection {
+            background: var(--yellow);
+            color: var(--black);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(20px);
+            padding: 14px 0;
+            box-shadow: 0 1px 0 var(--gray-200);
+        }
+
+        .nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--black);
+        }
+
+        .nav-cta {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            background: var(--black);
+            padding: 12px 24px;
+            border-radius: 100px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-cta { display: none; }
+        }
+
+        /* Success Toast */
+        .success-toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            color: white;
+            padding: 20px 24px;
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(34, 197, 94, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 10001;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .success-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .success-toast-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .success-toast-content strong {
+            display: block;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .success-toast-content p {
+            font-size: 14px;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 600px) {
+            .success-toast {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 0 80px;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(247, 201, 72, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 580px;
+        }
+
+        .hero-hook {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--yellow-hover);
+            background: var(--yellow-light);
+            padding: 12px 20px;
+            border-radius: 100px;
+            margin-bottom: 28px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-headline {
+            font-size: clamp(48px, 6vw, 72px);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+            color: var(--black);
+            margin-bottom: 24px;
+            animation: slideUp 0.6s ease-out 0.1s backwards;
+        }
+
+        .hero-headline-accent {
+            background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-hover) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subline {
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 16px;
+            line-height: 1.4;
+            animation: slideUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .hero-description {
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--gray-400);
+            margin-bottom: 36px;
+            animation: slideUp 0.6s ease-out 0.3s backwards;
+        }
+
+        .email-form {
+            margin-bottom: 24px;
+            animation: slideUp 0.6s ease-out 0.4s backwards;
+        }
+
+        .email-form-wrapper {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 18px 24px;
+            font-size: 16px;
+            font-family: var(--font);
+            border: 2px solid var(--gray-200);
+            border-radius: 100px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .email-input:focus {
+            border-color: var(--yellow);
+            box-shadow: 0 0 0 4px var(--yellow-light);
+        }
+
+        .email-input::placeholder {
+            color: var(--gray-400);
+        }
+
+        .btn-waitlist {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+            background: var(--yellow);
+            padding: 18px 32px;
+            border-radius: 100px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            font-family: var(--font);
+        }
+
+        .btn-waitlist:hover {
+            background: var(--yellow-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(247, 201, 72, 0.4);
+        }
+
+        .btn-waitlist:active {
+            transform: translateY(-1px);
+        }
+
+        .email-note {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        .hero-proof {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-top: 24px;
+            border-top: 1px solid var(--gray-200);
+            animation: slideUp 0.6s ease-out 0.5s backwards;
+        }
+
+        .hero-proof-text {
+            font-size: 14px;
+            color: var(--gray-400);
+        }
+
+        .hero-proof-text strong {
+            color: var(--gray-600);
+            font-weight: 700;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideUp 0.6s ease-out 0.3s backwards;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 520px;
+            aspect-ratio: 1;
+            background: var(--warm-gray);
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.02);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .sold-out-badge {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: var(--black);
+            color: var(--white);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 10px 18px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            z-index: 10;
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 50px;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-visual {
+                width: 100%;
+            }
+
+            .hero-image {
+                max-width: 100%;
+                margin: 0 auto;
+            }
+
+            .email-form-wrapper {
+                flex-direction: column;
+                max-width: 450px;
+                margin: 0 auto 12px;
+            }
+
+            .hero-proof {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-image {
+                border-radius: 20px;
+            }
+
+            .sold-out-badge {
+                top: 16px;
+                right: 16px;
+                font-size: 10px;
+                padding: 8px 14px;
+            }
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 100px 0;
+            background: var(--cream);
+            text-align: center;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--yellow-hover);
+            margin-bottom: 12px;
+        }
+
+        .section-headline {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            margin-bottom: 64px;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .problem-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 36px;
+            text-align: left;
+            border: 2px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .problem-card:hover {
+            border-color: var(--yellow);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .problem-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+
+        .problem-card h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 12px;
+        }
+
+        .problem-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--gray-600);
+        }
+
+        @media (max-width: 768px) {
+            .problem-section {
+                padding: 60px 0;
+            }
+
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Solution Section */
+        .solution-section {
+            padding: 100px 0;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .solution-content {
+            max-width: 700px;
+            margin: 0 auto 64px;
+        }
+
+        .benefit-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            text-align: center;
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--yellow-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+        }
+
+        .benefit-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .benefit-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--gray-600);
+        }
+
+        @media (max-width: 900px) {
+            .solution-section {
+                padding: 60px 0;
+            }
+
+            .benefit-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+        }
+
+        /* Use Cases Section */
+        .uses-section {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .uses-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .uses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .use-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .use-card:hover {
+            background: var(--yellow-light);
+            transform: translateY(-6px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .use-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .use-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .use-card p {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 900px) {
+            .uses-section {
+                padding: 60px 0;
+            }
+
+            .uses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .uses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+            padding: 100px 0;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .comparison-content {
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .comparison-image {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--warm-gray);
+            border-radius: 24px;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: var(--gray-400);
+            text-align: center;
+            padding: 40px;
+        }
+
+        .comparison-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .comparison-section {
+                padding: 60px 0;
+            }
+        }
+
+        /* Product Section */
+        .product-section {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .product-image {
+            background: var(--warm-gray);
+            border-radius: 32px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .product-details h2 {
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .product-tagline {
+            font-size: 17px;
+            color: var(--gray-600);
+            margin-bottom: 28px;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 36px;
+        }
+
+        .product-features li {
+            font-size: 15px;
+            line-height: 1.5;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            color: var(--gray-600);
+        }
+
+        .product-features li:last-child {
+            border-bottom: none;
+        }
+
+        .product-features strong {
+            color: var(--black);
+            font-weight: 700;
+        }
+
+        .waitlist-form {
+            background: var(--yellow-light);
+            padding: 28px;
+            border-radius: 20px;
+        }
+
+        .waitlist-form h4 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .waitlist-form p {
+            font-size: 14px;
+            color: var(--gray-600);
+            margin-bottom: 18px;
+        }
+
+        @media (max-width: 900px) {
+            .product-section {
+                padding: 60px 0;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .testimonial-card {
+            background: var(--cream);
+            border-radius: 24px;
+            padding: 36px;
+        }
+
+        .testimonial-stars {
+            color: var(--yellow);
+            font-size: 17px;
+            margin-bottom: 18px;
+            letter-spacing: 3px;
+        }
+
+        .testimonial-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--gray-600);
+            margin-bottom: 28px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--yellow-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--yellow-hover);
+        }
+
+        .author-name {
+            font-weight: 700;
+            color: var(--black);
+            font-size: 15px;
+        }
+
+        .author-title {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        @media (max-width: 900px) {
+            .testimonials-section {
+                padding: 60px 0;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+                gap: 24px;
+            }
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: var(--black);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-headline {
+            font-size: clamp(30px, 4vw, 44px);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: var(--white);
+            margin-bottom: 18px;
+        }
+
+        .cta-text {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--gray-400);
+            margin-bottom: 36px;
+        }
+
+        .cta-form .email-form-wrapper {
+            max-width: 500px;
+            margin: 0 auto 14px;
+        }
+
+        .cta-form .email-input {
+            background: var(--white);
+            border-color: transparent;
+        }
+
+        .cta-form .email-note {
+            color: var(--gray-400);
+        }
+
+        @media (max-width: 600px) {
+            .cta-section {
+                padding: 60px 0;
+            }
+
+            .cta-form .email-form-wrapper {
+                flex-direction: column;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            padding: 64px 0 36px;
+            background: var(--warm-gray);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--gray-600);
+            margin-top: 14px;
+        }
+
+        .footer h4 {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--black);
+        }
+
+        .footer-bottom {
+            padding-top: 36px;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: var(--gray-400);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-legal a {
+            font-size: 13px;
+            color: var(--gray-400);
+            text-decoration: none;
+        }
+
+        .footer-legal a:hover {
+            color: var(--black);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 18px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <a href="index.html" class="logo">Banana Tape</a>
+            <div class="nav-links">
+                <a href="#uses" class="nav-link">Use Cases</a>
+                <a href="#product" class="nav-link">Product</a>
+            </div>
+            <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+        </div>
+    </nav>
+
+    <!-- Success Toast -->
+    <div class="success-toast" id="successToast">
+        <div class="success-toast-icon">✓</div>
+        <div class="success-toast-content">
+            <strong>You're on the list!</strong>
+            <p>We'll reach out to you soon.</p>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-hook">For Crafters</span>
+                <h1 class="hero-headline">
+                    Create Without <span class="hero-headline-accent">the Mess</span>
+                </h1>
+                <p class="hero-subline">
+                    Professional craft organization that won't ruin your ribbons, papers, or precious supplies.
+                </p>
+                <p class="hero-description">
+                    Secure ribbon spools, organize yarn skeins, protect wrapping paper, and keep craft supplies organized—all without adhesive ruining delicate materials.
+                </p>
+
+                <form name="waitlist-hero" method="POST" data-netlify="true" class="email-form" id="heroForm">
+                    <input type="hidden" name="form-name" value="waitlist-hero">
+                    <input type="hidden" name="source" value="crafters-hero">
+                    <div class="email-form-wrapper">
+                        <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+                        <button type="submit" class="btn-waitlist">Join Waitlist</button>
+                    </div>
+                    <p class="email-note">Be first to know when we're back in stock. No spam, ever.</p>
+                </form>
+
+                <div class="hero-proof">
+                    <span class="hero-proof-text"><strong>Sold out in 48 hours.</strong> Join 2,000+ on the waitlist.</span>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image">
+                    <span class="sold-out-badge">Sold Out</span>
+                    <img src="placeholder-hero-crafters.jpg" alt="Craft room table with ribbons, yarn, and supplies organized with Banana Tape">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section">
+        <div class="container">
+            <p class="section-label">You Know the Frustration</p>
+            <h2 class="section-headline">Every Crafter's Nightmare</h2>
+
+            <div class="problem-grid reveal">
+                <div class="problem-card">
+                    <div class="problem-icon">🎀</div>
+                    <h4>Ribbon Unraveling</h4>
+                    <p>Ribbon ends unravel, spools unwinding, and beautiful materials ruined by adhesive tape that leaves marks.</p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon">🧶</div>
+                    <h4>Yarn Tangling</h4>
+                    <p>Yarn skeins coming undone, creating tangles, and wasting precious materials because they won't stay wound.</p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon">🎁</div>
+                    <h4>Wrapping Paper Ruined</h4>
+                    <p>Regular tape tears wrapping paper, leaves marks, and ruins expensive specialty papers you want to reuse.</p>
+                </div>
+
+                <div class="problem-card">
+                    <div class="problem-icon">😤</div>
+                    <h4>Craft Supplies Disaster</h4>
+                    <p>Fabric, ribbon, and delicate materials damaged by adhesive that wasn't meant for craft supplies.</p>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution-section">
+        <div class="container">
+            <div class="solution-content reveal">
+                <p class="section-label">The Solution</p>
+                <h2 class="section-headline">Banana Tape Solves This</h2>
+                <p style="font-size: 17px; color: var(--gray-600); line-height: 1.7;">Self-sealing tape that only sticks to itself. Never to your cards, sleeves, or components. Reusable, repositionable, and completely safe for your collection.</p>
+            </div>
+
+            <div class="benefit-grid">
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">🎨</div>
+                    <h4>Safe for Delicate Materials</h4>
+                    <p>No adhesive means no damage to ribbon, fabric, paper, or any craft supply.</p>
+                </div>
+
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">♻️</div>
+                    <h4>Reusable on Every Project</h4>
+                    <p>Use the same tape on multiple projects without losing grip or leaving residue.</p>
+                </div>
+
+                <div class="benefit-card reveal">
+                    <div class="benefit-icon">✨</div>
+                    <h4>Professional Results</h4>
+                    <p>Keep your craft room organized like a professional studio.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    </section>
+
+    <!-- Use Cases -->
+    <section id="uses" class="uses-section">
+        <div class="container">
+            <div class="uses-header reveal">
+                <p class="section-label">Perfect For</p>
+                <h2 class="section-headline">Every Craft Supply</h2>
+            </div>
+            <div class="uses-grid">
+                <div class="use-card reveal">
+                    <div class="use-icon">🎀</div>
+                    <h4>Secure Ribbon Spools</h4>
+                    <p>Keep ribbon ends in place without adhesive touching the ribbon material.</p>
+                </div>
+                <div class="use-card reveal">
+                    <div class="use-icon">🧶</div>
+                    <h4>Organize Yarn Skeins</h4>
+                    <p>Hold yarn together without tangling or leaving marks on the fiber.</p>
+                </div>
+                <div class="use-card reveal">
+                    <div class="use-icon">🎁</div>
+                    <h4>Protect Wrapping Paper</h4>
+                    <p>Keep rolls closed without tearing or marking expensive specialty papers.</p>
+                </div>
+                <div class="use-card reveal">
+                    <div class="use-icon">🧵</div>
+                    <h4>Bundle Fabric Bolts</h4>
+                    <p>Secure fabric without pins, clips, or adhesive that damages the material.</p>
+                </div>
+                <div class="use-card reveal">
+                    <div class="use-icon">🖌️</div>
+                    <h4>Organize Paint Brushes</h4>
+                    <p>Bundle brushes by type or size for easy access and clean storage.</p>
+                </div>
+                <div class="use-card reveal">
+                    <div class="use-icon">📐</div>
+                    <h4>Seal Scrapbook Supplies</h4>
+                    <p>Keep papers, stickers, and embellishments organized without damage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section">
+        <div class="container">
+            <div class="comparison-content reveal">
+                <p class="section-label">Before & After</p>
+                <h2 class="section-headline">The Difference is Clear</h2>
+                <p style="font-size: 17px; color: var(--gray-600); line-height: 1.7;">See how Banana Tape keeps your collection organized without the mess and damage of traditional methods.</p>
+            </div>
+            <div class="comparison-image reveal">
+                <img src="placeholder-comparison-crafters.jpg" alt="Before and after comparison: messy game components vs organized collection with Banana Tape">
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section id="product" class="product-section">
+        <div class="container">
+            <div class="product-grid">
+                <div class="product-image reveal">
+                    <img src="three-rolls.png" alt="Banana Tape - 3 premium yellow rolls">
+                </div>
+                <div class="product-details">
+                    <p class="section-label">Waitlist</p>
+                    <h2>Get Banana Tape for Your Collection</h2>
+                    <p class="product-tagline">Sold out in 48 hours. Join the waitlist for early access to the next drop.</p>
+
+                    <ul class="product-features">
+                        <li><strong>Self-sealing</strong> — only sticks to itself, never to cards or sleeves</li>
+                        <li><strong>Reusable</strong> — use it hundreds of times without losing grip</li>
+                        <li><strong>Transparent</strong> — see your decks and components at a glance</li>
+                        <li><strong>No residue</strong> — remove and reposition without any sticky mess</li>
+                    </ul>
+
+                    <div class="waitlist-form">
+                        <h4>Join the Waitlist</h4>
+                        <p>Be the first to know when we restock. Lock in early access pricing.</p>
+                        <form name="waitlist-product" method="POST" data-netlify="true" id="productForm">
+                            <input type="hidden" name="form-name" value="waitlist-product">
+                            <input type="hidden" name="source" value="crafters-product">
+                            <div class="email-form-wrapper">
+                                <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+                                <button type="submit" class="btn-waitlist">Join Waitlist</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="testimonials-header reveal">
+                <p class="section-label">Reviews</p>
+                <h2 class="section-headline">What Crafters Are Saying</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "I use this on all my thread spools. No more unraveling, no more tangled messes. I've been buying this stuff for years... it lasts forever and works every single time."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">L</div>
+                        <div>
+                            <div class="author-name">Linda M.</div>
+                            <div class="author-title">Quilter</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Perfect for my ribbon collection. Regular tape ruined so many of my specialty ribbons. This keeps everything organized without any damage."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">C</div>
+                        <div>
+                            <div class="author-name">Carol B.</div>
+                            <div class="author-title">Professional Crafter</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "My craft room is finally organized. Yarn, fabric, paper—everything stays put without damage. This tape changed how I organize my supplies."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div>
+                            <div class="author-name">Susan K.</div>
+                            <div class="author-title">Scrapbooker</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content reveal">
+                <h2 class="cta-headline">Don't miss the restock.</h2>
+                <p class="cta-text">Join 2,000+ crafters waiting for Banana Tape. Be first to know when we're back.</p>
+                <form name="waitlist-footer" method="POST" data-netlify="true" class="cta-form" id="footerForm">
+                    <input type="hidden" name="form-name" value="waitlist-footer">
+                    <input type="hidden" name="source" value="crafters-footer">
+                    <div class="email-form-wrapper">
+                        <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+                        <button type="submit" class="btn-waitlist">Join Waitlist</button>
+                    </div>
+                    <p class="email-note">No spam. We'll email you once when we restock.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">Banana Tape</a>
+                    <p>Wrap anything. Damage nothing.<br>The tape you won't regret.</p>
+                </div>
+                <div>
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Main Site</a></li>
+                        <li><a href="#uses">Use Cases</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:hello@bananatape.com">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Our Story</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Banana Tape. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < window.innerHeight - elementVisible) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Handle all form submissions with success toast
+        const successToast = document.getElementById('successToast');
+
+        function showSuccessToast() {
+            successToast.classList.add('show');
+            setTimeout(() => {
+                successToast.classList.remove('show');
+            }, 2000);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+
+            // Submit to Netlify
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(form)).toString()
+            }).then(() => {
+                showSuccessToast();
+                form.reset();
+            }).catch((error) => {
+                console.error('Form submission error:', error);
+                showSuccessToast();
+                form.reset();
+            });
+        }
+
+        // Attach to all forms
+        const formIds = ['heroForm', 'productForm', 'footerForm'];
+        formIds.forEach(formId => {
+            const form = document.getElementById(formId);
+            if (form) {
+                form.addEventListener('submit', handleFormSubmit);
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1309,6 +1309,217 @@
         }
 
         /* ============================================
+           ONE ROLL REPLACES ALL SECTION
+           ============================================ */
+
+        .replaces-all-section {
+            padding: 100px 0;
+            background: var(--cream);
+            text-align: center;
+        }
+
+        .replaces-all-section .section-heading {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -0.04em;
+            color: var(--black);
+            margin-bottom: 16px;
+        }
+
+        .replaces-all-section .section-subheading {
+            font-size: clamp(18px, 2.5vw, 24px);
+            color: var(--gray-dark);
+            max-width: 700px;
+            margin: 0 auto 64px;
+        }
+
+        .replaces-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .replace-item {
+            background: var(--white);
+            padding: 32px 24px;
+            border-radius: 20px;
+            transition: all 0.3s var(--ease-out);
+            border: 2px solid transparent;
+        }
+
+        .replace-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--yellow);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .replace-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            filter: grayscale(30%);
+        }
+
+        .replace-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 8px;
+        }
+
+        .replace-benefit {
+            font-size: 15px;
+            color: var(--gray-dark);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 900px) {
+            .replaces-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .replaces-all-section {
+                padding: 60px 0;
+            }
+
+            .replaces-all-section .section-subheading {
+                margin-bottom: 48px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .replaces-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .replace-item {
+                padding: 28px 20px;
+            }
+
+            .replace-icon {
+                font-size: 40px;
+            }
+        }
+
+        /* ============================================
+           SURVIVES ELEMENTS SECTION
+           ============================================ */
+
+        .survives-section {
+            padding: 100px 0;
+            background: linear-gradient(180deg, var(--white) 0%, var(--yellow-ultra-light) 50%, var(--white) 100%);
+            text-align: center;
+        }
+
+        .survives-section .section-heading {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -0.04em;
+            color: var(--black);
+            margin-bottom: 16px;
+        }
+
+        .survives-section .section-subheading {
+            font-size: clamp(18px, 2.5vw, 24px);
+            color: var(--gray-dark);
+            max-width: 800px;
+            margin: 0 auto 64px;
+        }
+
+        .survives-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .survives-item {
+            background: var(--white);
+            padding: 40px 28px;
+            border-radius: 24px;
+            transition: all 0.3s var(--ease-out);
+            border: 2px solid var(--cream);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+        }
+
+        .survives-item:hover {
+            transform: translateY(-12px);
+            border-color: var(--yellow);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+        }
+
+        .survives-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .survives-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .survives-description {
+            font-size: 16px;
+            color: var(--gray-dark);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .survives-benefit {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--yellow-dark);
+            background: var(--yellow-ultra-light);
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        @media (max-width: 1024px) {
+            .survives-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .survives-section {
+                padding: 60px 0;
+            }
+
+            .survives-section .section-subheading {
+                margin-bottom: 48px;
+            }
+
+            .survives-item {
+                padding: 32px 24px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .survives-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .survives-icon {
+                font-size: 56px;
+            }
+        }
+
+        /* ============================================
            PRODUCT SECTION
            ============================================ */
 
@@ -1340,6 +1551,137 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
+        }
+
+        /* Product Carousel Styles */
+        .product-carousel {
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slides {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s var(--ease-out);
+            pointer-events: none;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-out);
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-nav:hover {
+            background: var(--yellow);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .carousel-nav svg {
+            color: var(--black);
+        }
+
+        .carousel-prev {
+            left: 16px;
+        }
+
+        .carousel-next {
+            right: 16px;
+        }
+
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--yellow);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-out);
+            padding: 0;
+        }
+
+        .carousel-dot.active {
+            background: var(--yellow);
+            transform: scale(1.2);
+        }
+
+        .carousel-dot:hover {
+            background: var(--yellow);
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+            }
+
+            .carousel-prev {
+                left: 12px;
+            }
+
+            .carousel-next {
+                right: 12px;
+            }
+
+            .carousel-dots {
+                bottom: 16px;
+            }
+
+            .carousel-dot {
+                width: 10px;
+                height: 10px;
+            }
         }
 
         .product-details .section-label {
@@ -1825,7 +2167,7 @@
             <div class="hero-visual">
                 <div class="hero-image">
                     <span class="sold-out-badge">Sold Out</span>
-                    <img src="product-specs.png" alt="Banana Tape roll - 50ft long, 1 inch wide, clear and reusable">
+                    <img src="three-rolls.png" alt="Banana Tape - 3 premium yellow rolls, clear reusable silicone tape">
                 </div>
             </div>
         </div>
@@ -1871,15 +2213,6 @@
                 <div class="marquee-item">✓ Transparent</div>
                 <div class="marquee-item">✓ Waterproof</div>
                 <div class="marquee-item">✓ Lasts forever</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FEATURES SHOWCASE -->
-    <section class="features-showcase">
-        <div class="container">
-            <div class="features-image reveal">
-                <img src="feature-icons.png" alt="Banana Tape features: Waterproof, Non-Adhesive, Reusable">
             </div>
         </div>
     </section>
@@ -2055,13 +2388,148 @@
         </div>
     </section>
 
+    <!-- ONE ROLL REPLACES ALL -->
+    <section class="replaces-all-section">
+        <div class="container">
+            <h2 class="section-heading reveal">One Roll Replaces Everything<br>in Your Junk Drawer</h2>
+            <p class="section-subheading reveal">Stop buying single-purpose fasteners. Banana Tape does it all.</p>
+
+            <div class="replaces-grid">
+                <div class="replace-item reveal">
+                    <div class="replace-icon">🔗</div>
+                    <div class="replace-name">Zip Ties</div>
+                    <div class="replace-benefit">Reusable cable bundling without cutting them off</div>
+                </div>
+
+                <div class="replace-item reveal" style="transition-delay: 0.05s;">
+                    <div class="replace-icon">🎀</div>
+                    <div class="replace-name">Rubber Bands</div>
+                    <div class="replace-benefit">Won't snap, dry out, or lose elasticity</div>
+                </div>
+
+                <div class="replace-item reveal" style="transition-delay: 0.1s;">
+                    <div class="replace-icon">📦</div>
+                    <div class="replace-name">Masking Tape</div>
+                    <div class="replace-benefit">No sticky residue on surfaces</div>
+                </div>
+
+                <div class="replace-item reveal" style="transition-delay: 0.15s;">
+                    <div class="replace-icon">📝</div>
+                    <div class="replace-name">Scotch Tape</div>
+                    <div class="replace-benefit">Crystal clear without the permanent mess</div>
+                </div>
+
+                <div class="replace-item reveal" style="transition-delay: 0.2s;">
+                    <div class="replace-icon">💇</div>
+                    <div class="replace-name">Hair Ties</div>
+                    <div class="replace-benefit">Perfect for bundling goods (not hair!)</div>
+                </div>
+
+                <div class="replace-item reveal" style="transition-delay: 0.25s;">
+                    <div class="replace-icon">🔲</div>
+                    <div class="replace-name">Velcro Strips</div>
+                    <div class="replace-benefit">No fuzzy buildup or weakening over time</div>
+                </div>
+
+                <div class="replace-item reveal" style="transition-delay: 0.3s;">
+                    <div class="replace-icon">🛠️</div>
+                    <div class="replace-name">Duct Tape</div>
+                    <div class="replace-benefit">Strong hold without the sticky mess</div>
+                </div>
+
+                <div class="replace-item reveal" style="transition-delay: 0.35s;">
+                    <div class="replace-icon">⚡</div>
+                    <div class="replace-name">Electrical Tape</div>
+                    <div class="replace-benefit">Insulates without adhesive buildup</div>
+                </div>
+
+                <div class="replace-item reveal" style="transition-delay: 0.4s;">
+                    <div class="replace-icon">🚰</div>
+                    <div class="replace-name">Plumbing Tape</div>
+                    <div class="replace-benefit">Waterproof seal that's removable</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SURVIVES THE ELEMENTS -->
+    <section class="survives-section">
+        <div class="container">
+            <h2 class="section-heading reveal">The Last Tape You'll Ever Need</h2>
+            <p class="section-subheading reveal">Tested in the harshest conditions. Works when everything else fails.</p>
+
+            <div class="survives-grid">
+                <div class="survives-item reveal">
+                    <span class="survives-icon">🔥</span>
+                    <div class="survives-title">Fire/Heat Resistant</div>
+                    <div class="survives-description">Withstands high temperatures without melting or degrading</div>
+                    <div class="survives-benefit">Won't fail in heat</div>
+                </div>
+
+                <div class="survives-item reveal" style="transition-delay: 0.1s;">
+                    <span class="survives-icon">❄️</span>
+                    <div class="survives-title">Freeze-Proof</div>
+                    <div class="survives-description">Works perfectly in sub-zero conditions and icy environments</div>
+                    <div class="survives-benefit">Stays flexible</div>
+                </div>
+
+                <div class="survives-item reveal" style="transition-delay: 0.2s;">
+                    <span class="survives-icon">💧</span>
+                    <div class="survives-title">100% Waterproof</div>
+                    <div class="survives-description">Fully submersible - creates a watertight seal every time</div>
+                    <div class="survives-benefit">Total water protection</div>
+                </div>
+
+                <div class="survives-item reveal" style="transition-delay: 0.3s;">
+                    <span class="survives-icon">🌪️</span>
+                    <div class="survives-title">Dust & Debris Proof</div>
+                    <div class="survives-description">Non-adhesive surface repels particles and stays clean</div>
+                    <div class="survives-benefit">Always ready to use</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- PRODUCT SECTION -->
     <section id="waitlist" class="product-section">
         <div class="container">
             <div class="product-grid">
                 <div class="product-image reveal">
                     <span class="sold-out-badge">Sold Out</span>
-                    <img src="product-specs.png" alt="Banana Tape: 50 ft long, 1 inch wide, clear and reusable">
+                    <div class="product-carousel" role="region" aria-label="Product images">
+                        <div class="carousel-container">
+                            <div class="carousel-slides" id="carouselSlides">
+                                <div class="carousel-slide active">
+                                    <img src="three-rolls.png" alt="Banana Tape - 3 premium yellow rolls, image 1 of 4">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="product-specs.png" alt="Banana Tape specs - 50 ft long, 1 inch wide, image 2 of 4">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="waterproof-demo.png" alt="Banana Tape waterproof demonstration, image 3 of 4">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="kids-craft-scene.png" alt="Banana Tape in craft room organization, image 4 of 4">
+                                </div>
+                            </div>
+                            <button class="carousel-nav carousel-prev" aria-label="Previous image" id="carouselPrev">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M15 18l-6-6 6-6"/>
+                                </svg>
+                            </button>
+                            <button class="carousel-nav carousel-next" aria-label="Next image" id="carouselNext">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <path d="M9 18l6-6-6-6"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="carousel-dots" id="carouselDots">
+                            <button class="carousel-dot active" aria-label="Go to slide 1" data-slide="0"></button>
+                            <button class="carousel-dot" aria-label="Go to slide 2" data-slide="1"></button>
+                            <button class="carousel-dot" aria-label="Go to slide 3" data-slide="2"></button>
+                            <button class="carousel-dot" aria-label="Go to slide 4" data-slide="3"></button>
+                        </div>
+                    </div>
                 </div>
                 <div class="product-details reveal" style="transition-delay: 0.1s;">
                     <p class="section-label">Coming back soon</p>
@@ -2364,6 +2832,93 @@
                     behavior: 'smooth'
                 });
             });
+        }
+
+        // Product Carousel Functionality
+        const carousel = {
+            currentSlide: 0,
+            totalSlides: 0,
+            slides: null,
+            dots: null,
+
+            init() {
+                this.slides = document.querySelectorAll('.carousel-slide');
+                this.dots = document.querySelectorAll('.carousel-dot');
+                this.totalSlides = this.slides.length;
+
+                if (this.totalSlides === 0) return;
+
+                // Button event listeners
+                const prevBtn = document.getElementById('carouselPrev');
+                const nextBtn = document.getElementById('carouselNext');
+
+                if (prevBtn) prevBtn.addEventListener('click', () => this.prev());
+                if (nextBtn) nextBtn.addEventListener('click', () => this.next());
+
+                // Dot event listeners
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') this.prev();
+                    if (e.key === 'ArrowRight') this.next();
+                });
+
+                // Touch/swipe support
+                let touchStartX = 0;
+                let touchEndX = 0;
+                const carouselContainer = document.querySelector('.carousel-container');
+
+                if (carouselContainer) {
+                    carouselContainer.addEventListener('touchstart', (e) => {
+                        touchStartX = e.changedTouches[0].screenX;
+                    });
+
+                    carouselContainer.addEventListener('touchend', (e) => {
+                        touchEndX = e.changedTouches[0].screenX;
+                        this.handleSwipe();
+                    });
+                }
+
+                const handleSwipe = () => {
+                    if (touchEndX < touchStartX - 50) this.next(); // Swipe left
+                    if (touchEndX > touchStartX + 50) this.prev(); // Swipe right
+                };
+
+                this.handleSwipe = handleSwipe;
+            },
+
+            goToSlide(index) {
+                // Remove active class from current slide and dot
+                this.slides[this.currentSlide].classList.remove('active');
+                this.dots[this.currentSlide].classList.remove('active');
+
+                // Update current slide index
+                this.currentSlide = index;
+
+                // Add active class to new slide and dot
+                this.slides[this.currentSlide].classList.add('active');
+                this.dots[this.currentSlide].classList.add('active');
+            },
+
+            next() {
+                const nextIndex = (this.currentSlide + 1) % this.totalSlides;
+                this.goToSlide(nextIndex);
+            },
+
+            prev() {
+                const prevIndex = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                this.goToSlide(prevIndex);
+            }
+        };
+
+        // Initialize carousel when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => carousel.init());
+        } else {
+            carousel.init();
         }
     </script>
 
