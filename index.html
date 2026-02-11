@@ -158,6 +158,67 @@
         }
 
         /* ============================================
+           SUCCESS TOAST
+           ============================================ */
+
+        .success-toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            color: white;
+            padding: 20px 24px;
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(34, 197, 94, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 10001;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .success-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .success-toast-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .success-toast-content strong {
+            display: block;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .success-toast-content p {
+            font-size: 14px;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 600px) {
+            .success-toast {
+                top: 16px;
+                right: 16px;
+                left: 16px;
+            }
+        }
+
+        /* ============================================
            POPUP MODAL - PREMIUM EXECUTION
            ============================================ */
 
@@ -1628,6 +1689,15 @@
         </div>
     </nav>
 
+    <!-- SUCCESS TOAST -->
+    <div class="success-toast" id="successToast">
+        <div class="success-toast-icon">✓</div>
+        <div class="success-toast-content">
+            <strong>You're on the list!</strong>
+            <p>We'll reach out to you soon.</p>
+        </div>
+    </div>
+
     <!-- POPUP MODAL -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
@@ -1647,7 +1717,7 @@
                 <li><strong>Free shipping</strong> on your first order</li>
             </ul>
 
-            <form name="waitlist-popup" method="POST" data-netlify="true" action="/success.html" data-netlify-honeypot="bot-field">
+            <form name="waitlist-popup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" id="popupForm">
                 <input type="hidden" name="form-name" value="waitlist-popup">
                 <input type="hidden" name="source" value="popup">
                 <p style="display: none;"><label>Don't fill this out: <input name="bot-field"></label></p>
@@ -1669,7 +1739,10 @@
                     Wrap anything.<br><span class="hero-headline-accent">Damage nothing.</span>
                 </h1>
                 <p class="hero-subline">
-                    Self-sealing tape that only sticks to itself. Never to your stuff.
+                    The self-sealing tape that only sticks to itself, never to your stuff.
+                </p>
+                <p class="hero-description">
+                    Thread spools. Card collections. Plants. Cables. If you've ever had tape ruin something, you need Banana Tape.
                 </p>
 
                 <form name="waitlist-hero" method="POST" data-netlify="true" class="email-form">
@@ -1689,7 +1762,7 @@
             <div class="hero-visual">
                 <div class="hero-image">
                     <span class="sold-out-badge">Sold Out</span>
-                    <img src="three-rolls.png" alt="Three rolls of Banana Tape with transparent tape unrolling">
+                    <img src="product-specs.png" alt="Banana Tape roll - 50ft long, 1 inch wide, clear and reusable">
                 </div>
             </div>
         </div>
@@ -1746,7 +1819,7 @@
                 For everything <span>regular tape</span> would ruin.
             </h2>
             <p class="hook-subtext reveal" style="transition-delay: 0.1s;">
-                No sticky residue. No damage. Banana Tape only sticks to itself.
+                Sticky residue on your thread spools. Rubber bands damaging your cards. Twist ties cutting into your plants. Regular tape and its alternatives damage the things they're supposed to protect.
             </p>
             <div class="hook-image reveal" style="transition-delay: 0.15s;">
                 <img src="crafts-spools.png" alt="Colorful thread spools with Banana Tape">
@@ -2150,6 +2223,35 @@
             if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
                 modalOverlay.classList.remove('active');
             }
+        });
+
+        // Handle popup form submission
+        const popupForm = document.getElementById('popupForm');
+        const successToast = document.getElementById('successToast');
+
+        popupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Submit to Netlify
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(new FormData(popupForm)).toString()
+            }).then(() => {
+                // Close modal
+                modalOverlay.classList.remove('active');
+
+                // Show success toast
+                successToast.classList.add('show');
+
+                // Hide after 2 seconds
+                setTimeout(() => {
+                    successToast.classList.remove('show');
+                }, 2000);
+
+                // Reset form
+                popupForm.reset();
+            }).catch((error) => console.error('Form submission error:', error));
         });
     </script>
 
