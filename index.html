@@ -1375,78 +1375,52 @@
             margin: 0 auto 64px;
         }
 
-        /* Circular Layout Container */
-        .replaces-circle-container {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            margin: 64px auto;
-            padding: 60px 20px;
-            min-height: 700px;
+        /* Grid Layout Container */
+        .replaces-grid-container {
+            max-width: 1000px;
+            margin: 64px auto 0;
         }
 
-        /* Center Hero Product */
-        .replaces-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 280px;
-            height: 280px;
-            z-index: 10;
+        .replaces-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-bottom: 48px;
         }
 
-        .replaces-center img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
-        }
-
-        /* Circular Items Positioned Around Center */
-        .replaces-circle-item {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .replaces-circle-image {
-            width: 120px;
-            height: 120px;
+        .replaces-item {
             background: var(--white);
-            border-radius: 50%;
-            padding: 20px;
-            margin-bottom: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border-radius: 20px;
+            padding: 32px 24px;
+            text-align: center;
             transition: all 0.3s var(--ease-out);
             border: 2px solid var(--gray-200);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
         }
 
-        .replaces-circle-image img {
+        .replaces-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--yellow);
+            box-shadow: 0 12px 32px rgba(247, 201, 72, 0.2);
+        }
+
+        .replaces-image-wrapper {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: var(--cream);
+            border-radius: 50%;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .replaces-image-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
-
-        .replaces-circle-item:hover .replaces-circle-image {
-            transform: scale(1.08);
-            border-color: var(--yellow);
-            box-shadow: 0 12px 32px rgba(247, 201, 72, 0.3);
-        }
-
-        .replaces-circle-label {
-            max-width: 160px;
-        }
-
-        /* Position each item in a circle - 6 items at 60° intervals */
-        .replaces-item-1 { top: 0%; left: 50%; transform: translate(-50%, -50%); }
-        .replaces-item-2 { top: 25%; right: 5%; transform: translate(0%, -50%); }
-        .replaces-item-3 { bottom: 25%; right: 5%; transform: translate(0%, 50%); }
-        .replaces-item-4 { bottom: 0%; left: 50%; transform: translate(-50%, 50%); }
-        .replaces-item-5 { bottom: 25%; left: 5%; transform: translate(0%, 50%); }
-        .replaces-item-6 { top: 25%; left: 5%; transform: translate(0%, -50%); }
 
         .replace-icon {
             font-size: 48px;
@@ -1493,22 +1467,11 @@
             line-height: 1.5;
         }
 
-        /* Mobile Responsive for Circular Layout */
+        /* Mobile Responsive for Grid Layout */
         @media (max-width: 900px) {
-            .replaces-circle-container {
-                max-width: 700px;
-                min-height: 600px;
-            }
-
-            .replaces-center {
-                width: 220px;
-                height: 220px;
-            }
-
-            .replaces-circle-image {
-                width: 100px;
-                height: 100px;
-                padding: 16px;
+            .replaces-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
             }
 
             .replace-name {
@@ -1525,23 +1488,15 @@
                 padding: 60px 0;
             }
 
-            .replaces-circle-container {
-                min-height: 500px;
+            .replaces-item {
+                padding: 28px 20px;
             }
 
-            .replaces-center {
-                width: 180px;
-                height: 180px;
-            }
-
-            .replaces-circle-image {
+            .replaces-image-wrapper {
                 width: 80px;
                 height: 80px;
-                padding: 12px;
-            }
-
-            .replaces-circle-label {
-                max-width: 120px;
+                padding: 16px;
+                margin-bottom: 16px;
             }
 
             .replace-name {
@@ -1555,40 +1510,22 @@
         }
 
         @media (max-width: 600px) {
-            .replaces-circle-container {
-                position: relative;
-                min-height: auto;
-                padding: 40px 20px;
+            .replaces-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
 
-            /* Stack items vertically on mobile */
-            .replaces-circle-item {
-                position: relative;
-                transform: none !important;
-                top: auto !important;
-                left: auto !important;
-                right: auto !important;
-                bottom: auto !important;
-                margin-bottom: 32px;
+            .replaces-grid-container {
+                margin-top: 48px;
             }
 
-            .replaces-center {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
-                width: 200px;
-                height: 200px;
-                margin: 0 auto 48px;
+            .replaces-item {
+                padding: 24px 20px;
             }
 
-            .replaces-circle-image {
-                width: 100px;
-                height: 100px;
-            }
-
-            .replaces-circle-label {
-                max-width: 280px;
+            .replaces-image-wrapper {
+                width: 90px;
+                height: 90px;
             }
         }
 
@@ -2289,7 +2226,7 @@
                 <a href="#uses" class="nav-link">Uses</a>
                 <a href="#how" class="nav-link">How It Works</a>
             </div>
-            <a href="#waitlist" class="nav-cta">Get Restocked</a>
+            <a href="#waitlist" class="nav-cta">Get Restock Alert</a>
         </div>
     </nav>
 
@@ -2312,7 +2249,7 @@
 
             <div class="modal-highlight">
                 <div class="modal-price">$9.99</div>
-                <span class="modal-price-label">Restock Price</span>
+                <span class="modal-price-label">Launch Price</span>
             </div>
 
             <ul class="modal-benefits">
@@ -2327,7 +2264,7 @@
                 <p style="display: none;"><label>Don't fill this out: <input name="bot-field"></label></p>
                 <div class="email-form-wrapper">
                     <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
-                    <button type="submit" class="btn-waitlist-modal">Get Restocked</button>
+                    <button type="submit" class="btn-waitlist-modal">Get Restock Alert</button>
                 </div>
                 <p class="email-note">No spam. We'll email you once when we restock.</p>
             </form>
@@ -2391,13 +2328,13 @@
                 <div class="marquee-item">✓ Reusable</div>
                 <div class="marquee-item">✓ Transparent</div>
                 <div class="marquee-item">✓ Waterproof</div>
-                <div class="marquee-item">✓ Lasts forever</div>
+                <div class="marquee-item">✓ Long-lasting</div>
                 <div class="marquee-item">✓ Self-sealing</div>
                 <div class="marquee-item">✓ Zero residue</div>
                 <div class="marquee-item">✓ Reusable</div>
                 <div class="marquee-item">✓ Transparent</div>
                 <div class="marquee-item">✓ Waterproof</div>
-                <div class="marquee-item">✓ Lasts forever</div>
+                <div class="marquee-item">✓ Long-lasting</div>
             </div>
             <div class="marquee-content">
                 <div class="marquee-item">✓ Self-sealing</div>
@@ -2405,13 +2342,13 @@
                 <div class="marquee-item">✓ Reusable</div>
                 <div class="marquee-item">✓ Transparent</div>
                 <div class="marquee-item">✓ Waterproof</div>
-                <div class="marquee-item">✓ Lasts forever</div>
+                <div class="marquee-item">✓ Long-lasting</div>
                 <div class="marquee-item">✓ Self-sealing</div>
                 <div class="marquee-item">✓ Zero residue</div>
                 <div class="marquee-item">✓ Reusable</div>
                 <div class="marquee-item">✓ Transparent</div>
                 <div class="marquee-item">✓ Waterproof</div>
-                <div class="marquee-item">✓ Lasts forever</div>
+                <div class="marquee-item">✓ Long-lasting</div>
             </div>
         </div>
     </section>
@@ -2450,7 +2387,7 @@
         <div class="container">
             <div class="uses-header reveal">
                 <p class="section-label">Who this is for</p>
-                <h2 class="section-headline">See Yourself Here</h2>
+                <h2 class="section-headline">Who This Is For</h2>
             </div>
             <div class="uses-grid">
                 <div class="use-card reveal">
@@ -2486,7 +2423,7 @@
                         <img src="uses-travelers.png" alt="Travelers packing toiletries and cords">
                     </div>
                     <h4>Travelers</h4>
-                    <p>Pack smart with leak-proof seals and tidy cords</p>
+                    <p>Pack smart with secure bundles and neat organization</p>
                 </div>
                 <div class="use-card reveal" style="transition-delay: 0.25s;">
                     <div class="use-image">
@@ -2511,7 +2448,7 @@
                     <div class="step-image">
                         <img src="how-it-works-cut.png" alt="Tear off a strip of Banana Tape">
                     </div>
-                    <h4>1. Cut</h4>
+                    <h4>1. Tear</h4>
                     <p>Tear off what you need. No scissors required.</p>
                 </div>
                 <div class="step reveal" style="transition-delay: 0.1s;">
@@ -2551,68 +2488,52 @@
         <div class="container">
             <h2 class="section-heading reveal">One Roll Replaces Everything in Your Junk Drawer</h2>
 
-            <div class="replaces-circle-container reveal" style="transition-delay: 0.1s;">
-                <!-- Center Hero Product -->
-                <div class="replaces-center">
-                    <img src="replaces-center-hero.png" alt="Banana Tape Roll">
-                </div>
-
-                <!-- Circular Items -->
-                <div class="replaces-circle-item replaces-item-1 reveal" style="transition-delay: 0.2s;">
-                    <div class="replaces-circle-image">
-                        <img src="replaces-rubber-bands.png" alt="Rubber Bands">
-                    </div>
-                    <div class="replaces-circle-label">
+            <div class="replaces-grid-container reveal" style="transition-delay: 0.1s;">
+                <div class="replaces-grid">
+                    <div class="replaces-item reveal" style="transition-delay: 0.15s;">
+                        <div class="replaces-image-wrapper">
+                            <img src="replaces-rubber-bands.png" alt="Rubber Bands">
+                        </div>
                         <div class="replace-name">Rubber Bands</div>
                         <div class="replace-benefit">Snap, break, and leave marks</div>
                     </div>
-                </div>
 
-                <div class="replaces-circle-item replaces-item-2 reveal" style="transition-delay: 0.25s;">
-                    <div class="replaces-circle-image">
-                        <img src="replaces-zip-ties.png" alt="Zip Ties">
-                    </div>
-                    <div class="replaces-circle-label">
+                    <div class="replaces-item reveal" style="transition-delay: 0.2s;">
+                        <div class="replaces-image-wrapper">
+                            <img src="replaces-zip-ties.png" alt="Zip Ties">
+                        </div>
                         <div class="replace-name">Zip Ties</div>
                         <div class="replace-benefit">Single use. Need scissors to remove.</div>
                     </div>
-                </div>
 
-                <div class="replaces-circle-item replaces-item-3 reveal" style="transition-delay: 0.3s;">
-                    <div class="replaces-circle-image">
-                        <img src="replaces-scotch-tape.png" alt="Scotch Tape">
-                    </div>
-                    <div class="replaces-circle-label">
+                    <div class="replaces-item reveal" style="transition-delay: 0.25s;">
+                        <div class="replaces-image-wrapper">
+                            <img src="replaces-scotch-tape.png" alt="Scotch Tape">
+                        </div>
                         <div class="replace-name">Scotch Tape</div>
                         <div class="replace-benefit">Sticky residue. Tears paper. Yellows.</div>
                     </div>
-                </div>
 
-                <div class="replaces-circle-item replaces-item-4 reveal" style="transition-delay: 0.35s;">
-                    <div class="replaces-circle-image">
-                        <img src="replaces-velcro.png" alt="Velcro Strips">
-                    </div>
-                    <div class="replaces-circle-label">
+                    <div class="replaces-item reveal" style="transition-delay: 0.3s;">
+                        <div class="replaces-image-wrapper">
+                            <img src="replaces-velcro.png" alt="Velcro Strips">
+                        </div>
                         <div class="replace-name">Velcro Strips</div>
                         <div class="replace-benefit">Collects lint and pet hair. Loses grip.</div>
                     </div>
-                </div>
 
-                <div class="replaces-circle-item replaces-item-5 reveal" style="transition-delay: 0.4s;">
-                    <div class="replaces-circle-image">
-                        <img src="replaces-electrical-tape.png" alt="Electrical Tape">
-                    </div>
-                    <div class="replaces-circle-label">
+                    <div class="replaces-item reveal" style="transition-delay: 0.35s;">
+                        <div class="replaces-image-wrapper">
+                            <img src="replaces-electrical-tape.png" alt="Electrical Tape">
+                        </div>
                         <div class="replace-name">Electrical Tape</div>
                         <div class="replace-benefit">Gummy residue. Unwinds in heat.</div>
                     </div>
-                </div>
 
-                <div class="replaces-circle-item replaces-item-6 reveal" style="transition-delay: 0.45s;">
-                    <div class="replaces-circle-image">
-                        <img src="replaces-twist-ties.png" alt="Twist Ties">
-                    </div>
-                    <div class="replaces-circle-label">
+                    <div class="replaces-item reveal" style="transition-delay: 0.4s;">
+                        <div class="replaces-image-wrapper">
+                            <img src="replaces-twist-ties.png" alt="Twist Ties">
+                        </div>
                         <div class="replace-name">Twist Ties</div>
                         <div class="replace-benefit">Weak, ugly, and always getting lost</div>
                     </div>
@@ -2632,7 +2553,7 @@
             <div class="survives-grid">
                 <div class="survives-item reveal">
                     <div class="survives-image">
-                        <img src="works-heat.png" alt="Heat resistant tape on car dashboard">
+                        <img src="works-heat.png" alt="Heat resistant tape in car center console cup holders">
                     </div>
                     <div class="survives-title">Heat Resistant to 200°F</div>
                     <div class="survives-description">Stays strong in hot cars, garages, and direct sunlight. Won't melt or lose its grip.</div>
@@ -2640,7 +2561,7 @@
 
                 <div class="survives-item reveal" style="transition-delay: 0.1s;">
                     <div class="survives-image">
-                        <img src="works-freeze.png" alt="Freeze-proof tape in freezer">
+                        <img src="works-freeze.png" alt="Freeze-proof tape on outdoor faucet in snow">
                     </div>
                     <div class="survives-title">Freeze-Proof</div>
                     <div class="survives-description">Use it in freezers, winter storage, or sub-zero outdoor conditions. Stays flexible, never brittle.</div>
@@ -2675,16 +2596,10 @@
                         <div class="carousel-container">
                             <div class="carousel-slides" id="carouselSlides">
                                 <div class="carousel-slide active">
-                                    <img src="product-roll-hero.png" alt="Banana Tape - premium yellow roll, image 1 of 4">
+                                    <img src="product-roll-hero.png" alt="Banana Tape - premium yellow roll, image 1 of 2">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="product-in-use.png" alt="Banana Tape wrapping colored pencils, image 2 of 4">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="replaces-center-hero.png" alt="Banana Tape roll detail, image 3 of 4">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="kids-craft-scene.png" alt="Banana Tape in craft room organization, image 4 of 4">
+                                    <img src="kids-craft-scene.png" alt="Banana Tape in craft room organization, image 2 of 2">
                                 </div>
                             </div>
                             <button class="carousel-nav carousel-prev" aria-label="Previous image" id="carouselPrev">
@@ -2701,8 +2616,6 @@
                         <div class="carousel-dots" id="carouselDots">
                             <button class="carousel-dot active" aria-label="Go to slide 1" data-slide="0"></button>
                             <button class="carousel-dot" aria-label="Go to slide 2" data-slide="1"></button>
-                            <button class="carousel-dot" aria-label="Go to slide 3" data-slide="2"></button>
-                            <button class="carousel-dot" aria-label="Go to slide 4" data-slide="3"></button>
                         </div>
                     </div>
                 </div>
@@ -2752,7 +2665,7 @@
                             <input type="hidden" name="source" value="product">
                             <div class="email-form-wrapper">
                                 <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
-                                <button type="submit" class="btn-waitlist">Get Restocked</button>
+                                <button type="submit" class="btn-waitlist">Get Restock Alert</button>
                             </div>
                         </form>
                     </div>
@@ -2861,7 +2774,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2026 Banana Tape. All rights reserved.</p>
+                <p>© 2025 Banana Tape. All rights reserved.</p>
                 <div class="footer-legal">
                     <a href="#">Privacy</a>
                     <a href="#">Terms</a>
