@@ -2128,7 +2128,7 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
+            grid-template-columns: 2fr 1fr 1fr;
             gap: 48px;
             margin-bottom: 48px;
         }
@@ -2213,6 +2213,91 @@
                 gap: 18px;
                 text-align: center;
             }
+        }
+
+        /* ============================================
+           FAQ
+           ============================================ */
+
+        .faq-section {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .faq-list {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .faq-item:first-of-type {
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 24px 0;
+            font-family: var(--font);
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--black);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            transition: color 0.2s;
+        }
+
+        .faq-question:hover {
+            color: var(--yellow-hover);
+        }
+
+        .faq-icon {
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--gray-400);
+            flex-shrink: 0;
+            transition: transform 0.25s ease, color 0.25s ease;
+            line-height: 1;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(45deg);
+            color: var(--yellow-hover);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding-bottom: 24px;
+        }
+
+        .faq-answer p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--gray-600);
+        }
+
+        @media (max-width: 768px) {
+            .faq-section { padding: 60px 0; }
+            .faq-question { font-size: 15px; }
         }
     </style>
 </head>
@@ -2741,6 +2826,72 @@
         </div>
     </section>
 
+    <!-- FAQ -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="faq-header reveal">
+                <p class="section-label">FAQ</p>
+                <h2 class="section-headline">Common questions</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item reveal">
+                    <button class="faq-question" aria-expanded="false">
+                        What exactly is Banana Tape?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Banana Tape is a self-sealing PVC stretch tape that bonds only to itself — not to your stuff. It has zero adhesive. Wrap it around anything and it holds tight through self-fusion. Peel it off and there's nothing left behind: no residue, no marks, no damage.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal" style="transition-delay:0.05s">
+                    <button class="faq-question" aria-expanded="false">
+                        How is it different from regular tape or electrical tape?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Regular tape and electrical tape use adhesive that sticks to surfaces — causing residue, torn edges, and marks. Banana Tape has zero adhesive. It only bonds to itself through compression, making it safe for thread spools, trading cards, cables, plants, and anything else you'd never risk touching with normal tape.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal" style="transition-delay:0.1s">
+                    <button class="faq-question" aria-expanded="false">
+                        Is it really reusable?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes. Peel it off, stretch it slightly to release the bond, and re-wrap. It doesn't dry out, lose its grip, or degrade. One roll can last years of regular use.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal" style="transition-delay:0.15s">
+                    <button class="faq-question" aria-expanded="false">
+                        Is it waterproof?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>100% waterproof. It also handles temperatures from sub-zero cold up to 200°F (93°C), so it works in gardens, garages, and outdoor conditions — not just indoors.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal" style="transition-delay:0.2s">
+                    <button class="faq-question" aria-expanded="false">
+                        Why is it sold out?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We sold through our entire first run in 48 hours. We're working on restocking now. Join the waitlist and you'll be the first to know — and the first to order at the launch price.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal" style="transition-delay:0.25s">
+                    <button class="faq-question" aria-expanded="false">
+                        How much does it cost?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>$9.99 per roll at launch. Waitlist members also get free shipping on their first order. After the launch window, pricing may increase.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA -->
     <section class="cta-section">
         <div class="container">
@@ -2779,18 +2930,12 @@
                     <h4>Support</h4>
                     <ul class="footer-links">
                         <li><a href="mailto:hello@bananatape.com">Contact</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Company</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 Banana Tape. All rights reserved.</p>
+                <p>© 2026 Banana Tape. All rights reserved.</p>
                 <div class="footer-legal">
                     <a href="#">Privacy</a>
                     <a href="#">Terms</a>
@@ -2870,6 +3015,29 @@
             }
         });
 
+        // ---- UTM Parameter Capture (Meta Ads tracking) ----
+        function captureUTMParams() {
+            const params = new URLSearchParams(window.location.search);
+            const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+            const captured = {};
+            let hasUTM = false;
+            utmKeys.forEach(key => {
+                const val = params.get(key);
+                if (val) { captured[key] = val; hasUTM = true; }
+            });
+            if (hasUTM) {
+                localStorage.setItem('bananatape_utm', JSON.stringify(captured));
+            }
+        }
+
+        function getStoredUTM() {
+            try { return JSON.parse(localStorage.getItem('bananatape_utm') || '{}'); }
+            catch(e) { return {}; }
+        }
+
+        captureUTMParams();
+        // ---- End UTM Capture ----
+
         // Handle all form submissions with success toast
         const successToast = document.getElementById('successToast');
 
@@ -2884,11 +3052,16 @@
             e.preventDefault();
             const form = e.target;
 
+            // Build form data and append stored UTM params
+            const formData = new FormData(form);
+            const utmData = getStoredUTM();
+            Object.entries(utmData).forEach(([key, val]) => formData.set(key, val));
+
             // Submit to Netlify
             fetch('/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(new FormData(form)).toString()
+                body: new URLSearchParams(formData).toString()
             }).then(() => {
                 // Close modal if it's the popup form
                 if (form.id === 'popupForm') {
@@ -3024,6 +3197,24 @@
         } else {
             carousel.init();
         }
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const isOpen = item.classList.contains('open');
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('open');
+                    i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                });
+                // Toggle clicked
+                if (!isOpen) {
+                    item.classList.add('open');
+                    btn.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
     </script>
 
 </body>
